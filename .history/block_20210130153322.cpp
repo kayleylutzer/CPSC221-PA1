@@ -18,7 +18,8 @@ void Block::render(PNG &im, int x) const {
   for(int row = 0; row < height() ;row++ ){
     for(int column = x; column < width() + x; column++){
       HSLAPixel *original = im.getPixel(row,column);
-      *original = data[row][column - x];
+      original = data[row][column - x];
+
     }
   }
 }
