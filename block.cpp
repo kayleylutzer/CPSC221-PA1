@@ -39,5 +39,4 @@ void Block::build(PNG &im, int x, int width) {
     }
     data.push_back(row);
   } 
-  /* your code here */
 }

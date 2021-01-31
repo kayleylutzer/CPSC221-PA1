@@ -10,7 +10,7 @@
  * memory does not leak on destruction of a chain.
  */
 Chain::~Chain() {
-  /* your code here */
+  
 }
 
 /**
@@ -25,7 +25,13 @@ Chain::~Chain() {
  * @param ndata = The data to be inserted.
  */
 Chain::Node * Chain::insertAfter(Node * p, const Block &ndata) {
-  /* your code here */
+  Node *newNode = new Node(ndata);
+  if (p == NULL) {
+    head_->prev = newNode; // FIX THIS
+  } 
+  p->next = newNode;
+  length_++;
+  return newNode;
 }
 
 /**
@@ -35,7 +41,26 @@ Chain::Node * Chain::insertAfter(Node * p, const Block &ndata) {
  * Change the chain's head pointer if necessary.
  */
 void Chain::swap(Node *p, Node *q) {
-  /* your code here */
+  Node *sentinel;
+  sentinel->next = head_;
+
+  Node *end_sentinel;
+  Node *curr = head_;
+  while (curr->next != NULL) {
+    curr->next = curr;
+  }
+  end_sentinel->prev = curr;
+
+  if( p == q || p == NULL || q == NULL) return;
+  Node *pp = p->prev;
+  Node *pn = p->next;
+  Node *qp = q->prev;
+  Node *qn = q->next;
+
+  q->prev = pp;
+  q->next = pn;
+  p-> prev = qp;
+  p->next = qn;
 }
 
 /**

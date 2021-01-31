@@ -105,6 +105,8 @@ class Chain {
 
   Node * insertAfter(Node * p, const Block &ndata);
 
+  Node * getHead();
+
   /* =================== end of private PA1 functions ============== */
 };
 
