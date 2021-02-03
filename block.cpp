@@ -16,9 +16,9 @@ int Block::width() const {
 
 void Block::render(PNG &im, int x) const {
   unsigned int w = width();
-  for(unsigned int row = 0; row < height();row++ ){
+  for(unsigned int row = 0; row < height(); row++) {
     for(unsigned int column = x; column < w + x; column++){
-     *im.getPixel(row,column) = data[row][column - x];
+     *im.getPixel(row,column) = data[column - x][row];
     }
   }
 }
