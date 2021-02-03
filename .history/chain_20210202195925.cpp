@@ -111,7 +111,7 @@ void Chain::clear() {
  */
 void Chain::copy(Chain const &other) {
   /* your code here */
-  //clear();
+  clear();
   length_ = other.length_;
   head_ = new Node();
   head_ = other.head_;

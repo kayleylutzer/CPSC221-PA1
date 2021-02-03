@@ -10,7 +10,7 @@
  * memory does not leak on destruction of a chain.
  */
 Chain::~Chain() {
-  clear();
+  
 }
 
 /**
@@ -41,11 +41,11 @@ Chain::Node * Chain::insertAfter(Node * p, const Block &ndata) {
  * Change the chain's head pointer if necessary.
  */
 void Chain::swap(Node *p, Node *q) {
-  Node *sentinel = new Node();
+  Node *sentinel;
   sentinel->next = head_;
 
-  Node *end_sentinel = new Node();
-  Node *curr = head_ = new Node();
+  Node *end_sentinel;
+  Node *curr = head_;
   while (curr->next != NULL) {
     curr->next = curr;
   }
@@ -56,29 +56,11 @@ void Chain::swap(Node *p, Node *q) {
   Node *pn = p->next;
   Node *qp = q->prev;
   Node *qn = q->next;
-  if (q->next == p) {
-    q->next = pn;
-    p->prev = qp;
-    p->next = q;
 
-  } else if (p->next == q) {
-
-    p->next = qn;
-    q->prev = pp;
-    q->next = p;
-
-  } else {
-    q->prev = pp;
-    q->next = pn;
-    p-> prev = qp;
-    p->next = qn;
-
-  }
-
-  end_sentinel = NULL;
-  sentinel = NULL;
-  delete end_sentinel;
-  delete sentinel;
+  q->prev = pp;
+  q->next = pn;
+  p-> prev = qp;
+  p->next = qn;
 }
 
 /**
@@ -87,19 +69,6 @@ void Chain::swap(Node *p, Node *q) {
  */
 void Chain::clear() {
   /* your code here */
-  Node* curr = head_->next;
-  Node* n = new Node();
-
-  while (curr->next != NULL){
-    n = curr->next;
-    delete curr;
-    curr = n;
-  }
-  delete curr;
-  delete head_;
-  head_=NULL;
-  curr = NULL;
-  length_ = 0;
 }
 
 /**
@@ -111,18 +80,6 @@ void Chain::clear() {
  */
 void Chain::copy(Chain const &other) {
   /* your code here */
-  //clear();
-  length_ = other.length_;
-  head_ = new Node();
-  head_ = other.head_;
-
-  Node* curr_other = other.head_;
-  Node* curr = head_;
-
-  while (curr_other != NULL){
-    curr = insertAfter (curr, curr_other->data);
-    curr_other = curr_other->next;
-  }
 }
 
 /* Modifies the current chain: 

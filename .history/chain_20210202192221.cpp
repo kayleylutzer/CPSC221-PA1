@@ -41,11 +41,11 @@ Chain::Node * Chain::insertAfter(Node * p, const Block &ndata) {
  * Change the chain's head pointer if necessary.
  */
 void Chain::swap(Node *p, Node *q) {
-  Node *sentinel = new Node();
+  Node *sentinel;
   sentinel->next = head_;
 
-  Node *end_sentinel = new Node();
-  Node *curr = head_ = new Node();
+  Node *end_sentinel;
+  Node *curr = head_;
   while (curr->next != NULL) {
     curr->next = curr;
   }
@@ -111,18 +111,8 @@ void Chain::clear() {
  */
 void Chain::copy(Chain const &other) {
   /* your code here */
-  //clear();
-  length_ = other.length_;
-  head_ = new Node();
-  head_ = other.head_;
+  width_ = other.width_;
 
-  Node* curr_other = other.head_;
-  Node* curr = head_;
-
-  while (curr_other != NULL){
-    curr = insertAfter (curr, curr_other->data);
-    curr_other = curr_other->next;
-  }
 }
 
 /* Modifies the current chain: 

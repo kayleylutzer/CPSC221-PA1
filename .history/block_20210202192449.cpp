@@ -15,10 +15,10 @@ int Block::width() const {
 }
 
 void Block::render(PNG &im, int x) const {
-  unsigned int w = width();
-  for(unsigned int row = 0; row < height();row++ ){
-    for(unsigned int column = x; column < w + x; column++){
-     *im.getPixel(row,column) = data[row][column - x];
+  for(int row = 0; row < height() ;row++ ){
+    for(int column = x; column < width() + x; column++){
+      HSLAPixel *original = im.getPixel(row,column);
+      *original = data[row][column - x];
     }
   }
 }
@@ -29,19 +29,9 @@ void Block::render(PNG &im, int x) const {
    * in img. Assumes img is large enough to supply these pixels.
    */
 void Block::build(PNG &im, int x, int width) {
-  // int bound = width + x;
-  // int h = im.height();
-
-  // for(int j = 0; j < h; j++){
-  //   data[h-j].resize(width);
-  //   for(int i = x; i < bound; i++){
-  //     data[h-j][i-x] = *im.getPixel(i,j);
-  //   }
-  // }
-  
+  int height = im.height();
   vector<HSLAPixel> row;
-  int h = im.height();
-  for (int j = 0; j < h; j++){
+  for (int j = 0; j < height; j++){
     row.clear();
     for (int i = x; i < x + width ; i++){
       HSLAPixel *pixel = im.getPixel(i,j);

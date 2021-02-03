@@ -29,24 +29,23 @@ void Block::render(PNG &im, int x) const {
    * in img. Assumes img is large enough to supply these pixels.
    */
 void Block::build(PNG &im, int x, int width) {
-  // int bound = width + x;
-  // int h = im.height();
-
-  // for(int j = 0; j < h; j++){
-  //   data[h-j].resize(width);
-  //   for(int i = x; i < bound; i++){
-  //     data[h-j][i-x] = *im.getPixel(i,j);
-  //   }
-  // }
-  
-  vector<HSLAPixel> row;
+  int bound = width + x;
   int h = im.height();
-  for (int j = 0; j < h; j++){
-    row.clear();
-    for (int i = x; i < x + width ; i++){
-      HSLAPixel *pixel = im.getPixel(i,j);
-      row.push_back(*pixel);
+
+  for(int j = 0; j < h; j++){
+    data[h-j].resize(width);
+    for(int i = x; i < bound; i++){
+      data[h-j][i-x] = *im.getPixel(i,j);
     }
-    data.push_back(row);
-  } 
+  }
+  
+  // vector<HSLAPixel> row;
+  // for (int j = 0; j < h; j++){
+  //   row.clear();
+  //   for (int i = x; i < x + width ; i++){
+  //     HSLAPixel *pixel = im.getPixel(i,j);
+  //     row.push_back(*pixel);
+  //   }
+  //   data.push_back(row);
+  // } 
 }
