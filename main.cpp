@@ -32,14 +32,21 @@ int main() {
   //im.readFromFile("images/ronMueck.png");
   im.readFromFile("images/sun.png");
 
+  //testing building and rendering images
+  Block a;
+  a.build(im, 4, 30);
+  a.render(im, 4);
+  cout << "block width: " << a.width() << endl;
+  cout << "block height: " << a.height() << endl;
+
   Chain c(im, 5);
   // randomly scramble the blocks.
   c.scramble();
   // or test swapping a few blocks
-  //  c.testSwap(3,4); // swap the 3rd and 4th blocks.
-  //  c.testSwap(0,1);
-  //  c.testSwap(1,0);
-  //  c.testSwap(0,4);
+  // c.testSwap(3,4); // swap the 3rd and 4th blocks.
+  // c.testSwap(0,1);
+  // c.testSwap(1,0);
+  // c.testSwap(0,4);
 
   c.render().writeToFile("images/scram.png");  // look at scram.png to debug
 

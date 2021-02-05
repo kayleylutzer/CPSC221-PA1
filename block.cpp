@@ -39,6 +39,8 @@ void Block::build(PNG &im, int x, int width) {
   //   }
   // }
   
+  //data.resize(im.height());
+
   vector<HSLAPixel> row;
   int h = im.height();
   for (int j = 0; j < h; j++){
