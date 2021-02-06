@@ -15,10 +15,14 @@ int Block::width() const {
 }
 
 void Block::render(PNG &im, int x) const {
+  //cout << width() << endl;
+  //cout <<x << endl;
+  //cout << height()<< endl;
+  im.resize(width() + x, height() );
   unsigned int w = width();
-  for(unsigned int row = 0; row < height();row++ ){
+  for(unsigned int row = 0; row < height(); row++) {
     for(unsigned int column = x; column < w + x; column++){
-     *im.getPixel(row,column) = data[row][column - x];
+     *im.getPixel(column,row) = data[column - x][row];
     }
   }
 }
@@ -39,6 +43,8 @@ void Block::build(PNG &im, int x, int width) {
   //   }
   // }
   
+  //data.resize(im.height());
+
   vector<HSLAPixel> row;
   int h = im.height();
   for (int j = 0; j < h; j++){
