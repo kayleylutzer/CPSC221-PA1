@@ -27,19 +27,35 @@ int main() {
    * kh.png.  Why not?
    */
   PNG im;
-  //im.readFromFile("images/kh.png");
-  //im.readFromFile("images/terrain.png");
-  //im.readFromFile("images/ronMueck.png");
+  PNG im2;
+  PNG im3;
+  PNG im4;
+  im4.readFromFile("images/kh.png");
+  im3.readFromFile("images/terrain.png");
+  im2.readFromFile("images/ronMueck.png");
   im.readFromFile("images/sun.png");
 
+  cout << "pre width: " << im4.width() << endl;
+  cout << "pre height: " << im4.height() << endl;
+
+  //testing building and rendering images
+  Block a;
+  a.build(im4, 100, 300);
+  cout << "post width: " << a.width() << endl;
+  cout << "post block height: " << a.height() << endl;
+  a.render(im2, 0);
+  im2.writeToFile("images/test.png");
+  cout << "post width: " << a.width() << endl;
+  cout << "post block height: " << a.height() << endl;
+ 
   Chain c(im, 5);
   // randomly scramble the blocks.
   c.scramble();
   // or test swapping a few blocks
-  //  c.testSwap(3,4); // swap the 3rd and 4th blocks.
-  //  c.testSwap(0,1);
-  //  c.testSwap(1,0);
-  //  c.testSwap(0,4);
+  // c.testSwap(3,4); // swap the 3rd and 4th blocks.
+  // c.testSwap(0,1);
+  // c.testSwap(1,0);
+  // c.testSwap(0,4);
 
   c.render().writeToFile("images/scram.png");  // look at scram.png to debug
 
