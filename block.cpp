@@ -20,7 +20,6 @@ void Block::render(PNG &im, int x) const {
   //cout << height()<< endl;
   int w = width();
   int h = height();
-  im.resize(w + x, h);
   for(int row = 0; row < h; row++) {
     for(int column = x; column < w + x; column++){
      *im.getPixel(column, row) = data[row][column-x];

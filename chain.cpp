@@ -92,6 +92,44 @@ void Chain::swap(Node *p, Node *q) {
   delete end_sentinel;
   delete sentinel;
 }
+  
+  /**
+  
+  if (q->next == p) {
+    q->next = p->next;
+    p->prev = q->prev;
+    p->next = q;
+  } else if (p->next == q) {
+    p->next = q->next;
+    q->prev = p->prev;
+    q->next = p;
+  } else if (p == head_) {
+    q->prev = NULL;
+    q->next = p->next;
+    p->prev = q->prev;
+    p->next = q->next;
+  } else if (q == head_) {
+    q->prev = p->prev;
+    q->next = p->next;
+    p->prev = NULL;
+    p->next = q->next;
+  } else if (p->next == NULL) {
+    q->prev = p->prev;
+    q->next = NULL;
+    p->prev = q->prev;
+    p->next = q->next;
+  } else if (q->next == NULL) {
+    q->prev = p->prev;
+    q->next = p->next;
+    p->prev = q->prev;
+    p->next = NULL;
+  } else {
+    q->prev = p->prev;
+    q->next = p->next;
+    p->prev = q->prev;
+    p->next = q->next;
+  }
+}
 
 /**
  * Destroys all dynamically allocated memory associated with the
@@ -148,5 +186,29 @@ void Chain::copy(Chain const &other) {
  *    then repeat to unscramble the chain/image.
  */
 void Chain::unscramble() {
-  /* your code here */
+  Node* curr = head_;
+  Node* min;
+  
+  double max = 0;
+  double value = 1000000;
+
+  while (curr != NULL) {
+    Node* curr2 = curr->next;
+    value = 10000000;
+    while(curr2 != NULL) {
+      double distance = curr->data.distanceTo(curr2->data);
+      if (distance < value) {
+        value = distance;
+      }
+      curr2 = curr2->next;
+    }
+    if (value > max) {
+      min = curr;
+      max = value;
+    }
+    curr = curr->next;
+  }
+  swap(head_, min);
+
+
 }

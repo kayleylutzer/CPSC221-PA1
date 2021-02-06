@@ -40,27 +40,28 @@ int main() {
 
   //testing building and rendering images
   Block a;
-  a.build(im4, 100, 300);
+  a.build(im4, 0, 50);
   cout << "post width: " << a.width() << endl;
   cout << "post block height: " << a.height() << endl;
+  im2.resize(im4.width(), im4.height());
   a.render(im2, 0);
   im2.writeToFile("images/test.png");
   cout << "post width: " << a.width() << endl;
   cout << "post block height: " << a.height() << endl;
- 
+
   Chain c(im, 5);
   // randomly scramble the blocks.
   c.scramble();
   // or test swapping a few blocks
-  // c.testSwap(3,4); // swap the 3rd and 4th blocks.
-  // c.testSwap(0,1);
-  // c.testSwap(1,0);
-  // c.testSwap(0,4);
+  //c.testSwap(3,4); // swap the 3rd and 4th blocks.
+  //c.testSwap(0,1);
+  //c.testSwap(1,0);
+  //c.testSwap(0,4);
 
   c.render().writeToFile("images/scram.png");  // look at scram.png to debug
 
   // test unscramble()
-  c.unscramble();
+  //c.unscramble();
   c.render().writeToFile("images/unscram.png");// look at unscram.png also
 
   /* Check that unscramble works to unscramble a *saved* image too.
