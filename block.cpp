@@ -22,7 +22,11 @@ void Block::render(PNG &im, int x) const {
   unsigned int w = width();
   for(unsigned int row = 0; row < height(); row++) {
     for(unsigned int column = x; column < w + x; column++){
+<<<<<<< HEAD
      *im.getPixel(column,row) = data[column - x][row];
+=======
+     *im.getPixel(row,column) = data[column - x][row];
+>>>>>>> 99a9d7eda48aa6c461ab9ee5e37c06a95305000d
     }
   }
 }

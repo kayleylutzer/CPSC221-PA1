@@ -35,6 +35,7 @@ int main() {
   im2.readFromFile("images/ronMueck.png");
   im.readFromFile("images/sun.png");
 
+<<<<<<< HEAD
   cout << "pre width: " << im4.width() << endl;
   cout << "pre height: " << im4.height() << endl;
 

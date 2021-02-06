@@ -27,9 +27,21 @@ Chain::~Chain() {
 Chain::Node * Chain::insertAfter(Node * p, const Block &ndata) {
   Node *newNode = new Node(ndata);
   if (p == NULL) {
-    head_->prev = newNode; // FIX THIS
-  } 
-  p->next = newNode;
+    newNode->next = head_;
+    if (head_ == NULL) {
+      head_ = newNode;
+    } else {
+      head_->prev = newNode;
+      head_ = newNode;
+    }
+  } else {
+    newNode->next = p->next;
+    if (p->next != NULL) {
+      p->next->prev = newNode; 
+    } 
+    newNode->prev = p;
+    p->next = newNode;
+  }
   length_++;
   return newNode;
 }
@@ -87,17 +99,20 @@ void Chain::swap(Node *p, Node *q) {
  */
 void Chain::clear() {
   /* your code here */
+<<<<<<< HEAD
   Node* curr = head_->next;
 
   while (curr->next != NULL){
+=======
+  Node* curr = head_;
+
+  while (curr != NULL) {
+>>>>>>> 99a9d7eda48aa6c461ab9ee5e37c06a95305000d
     Node* n = curr->next;
     delete curr;
     curr = n;
   }
-  delete curr;
-  delete head_;
-  head_=NULL;
-  curr = NULL;
+  head_= NULL;
   length_ = 0;
 }
 
@@ -110,15 +125,19 @@ void Chain::clear() {
  */
 void Chain::copy(Chain const &other) {
   /* your code here */
+<<<<<<< HEAD
   //clear();
   length_ = other.length_;
+=======
+  clear();
+>>>>>>> 99a9d7eda48aa6c461ab9ee5e37c06a95305000d
   head_ = other.head_;
 
   Node* curr_other = other.head_;
   Node* curr = head_;
 
   while (curr_other != NULL){
-    curr = insertAfter (curr, curr_other->data);
+    curr = insertAfter(curr, curr_other->data);
     curr_other = curr_other->next;
   }
 }
