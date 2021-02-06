@@ -19,14 +19,10 @@ void Block::render(PNG &im, int x) const {
   //cout <<x << endl;
   //cout << height()<< endl;
   im.resize(width() + x, height() );
-  unsigned int w = width();
-  for(unsigned int row = 0; row < height(); row++) {
-    for(unsigned int column = x; column < w + x; column++){
-<<<<<<< HEAD
-     *im.getPixel(column,row) = data[column - x][row];
-=======
-     *im.getPixel(row,column) = data[column - x][row];
->>>>>>> 99a9d7eda48aa6c461ab9ee5e37c06a95305000d
+  //int w = width();
+  for(int row = 0; row < height(); row++) {
+    for(int column = x; column < width() + x; column++){
+     *im.getPixel(row,column) = data[row][column-x];
     }
   }
 }
@@ -46,17 +42,15 @@ void Block::build(PNG &im, int x, int width) {
   //     data[h-j][i-x] = *im.getPixel(i,j);
   //   }
   // }
-  
-  //data.resize(im.height());
 
-  vector<HSLAPixel> row;
   int h = im.height();
-  for (int j = 0; j < h; j++){
-    row.clear();
+  cout << h << endl;
+  data.resize(h);
+  for (int j = 0; j < h ; j++){
+    data[j].resize(width);
+    //vector<HSLAPixel> column;
     for (int i = x; i < x + width ; i++){
-      HSLAPixel *pixel = im.getPixel(i,j);
-      row.push_back(*pixel);
+      data[j][i-x] = *im.getPixel(j,i);
     }
-    data.push_back(row);
   } 
 }

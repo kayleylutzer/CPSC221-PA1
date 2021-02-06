@@ -99,15 +99,9 @@ void Chain::swap(Node *p, Node *q) {
  */
 void Chain::clear() {
   /* your code here */
-<<<<<<< HEAD
-  Node* curr = head_->next;
-
-  while (curr->next != NULL){
-=======
   Node* curr = head_;
 
   while (curr != NULL) {
->>>>>>> 99a9d7eda48aa6c461ab9ee5e37c06a95305000d
     Node* n = curr->next;
     delete curr;
     curr = n;
@@ -125,12 +119,7 @@ void Chain::clear() {
  */
 void Chain::copy(Chain const &other) {
   /* your code here */
-<<<<<<< HEAD
-  //clear();
-  length_ = other.length_;
-=======
   clear();
->>>>>>> 99a9d7eda48aa6c461ab9ee5e37c06a95305000d
   head_ = other.head_;
 
   Node* curr_other = other.head_;
