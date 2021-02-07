@@ -51,18 +51,23 @@ int main() {
 
   Chain c(im, 5);
   // randomly scramble the blocks.
-  c.scramble();
+  //c.scramble();
+  //cout << "scrambled" << endl;
   // or test swapping a few blocks
-  //c.testSwap(3,4); // swap the 3rd and 4th blocks.
-  //c.testSwap(0,1);
-  //c.testSwap(1,0);
-  //c.testSwap(0,4);
-
+  //c.testSwap(0,3); // swap the 3rd and 4th blocks.
+  //c.testSwap(1,3);
+  //c.testSwap(2,4);
+  c.testSwap(1,0);
+  //c.testSwap(2,3);
+  //cout << "finished swapping" << endl;
   c.render().writeToFile("images/scram.png");  // look at scram.png to debug
+  //cout << "rendered and wrote to file" << endl;
 
   // test unscramble()
   //c.unscramble();
-  c.render().writeToFile("images/unscram.png");// look at unscram.png also
+  //cout << "unscrambled" << endl;
+  //c.render().writeToFile("images/unscram.png");// look at unscram.png also
+  //cout << "output image for unscrambled" << endl;
 
   /* Check that unscramble works to unscramble a *saved* image too.
   PNG om;

@@ -53,83 +53,42 @@ Chain::Node * Chain::insertAfter(Node * p, const Block &ndata) {
  * Change the chain's head pointer if necessary.
  */
 void Chain::swap(Node *p, Node *q) {
+  cout << "tried to swap" << endl;
+  if( p == q || p == NULL || q == NULL) return;
   Node *sentinel = new Node();
   sentinel->next = head_;
+  head_->prev = sentinel;
 
   Node *end_sentinel = new Node();
-  Node *curr = head_ = new Node();
+  Node *curr = head_;
   while (curr->next != NULL) {
-    curr->next = curr;
+    curr = curr->next;
   }
+  curr->next = end_sentinel;
   end_sentinel->prev = curr;
 
-  if( p == q || p == NULL || q == NULL) return;
   Node *pp = p->prev;
   Node *pn = p->next;
   Node *qp = q->prev;
   Node *qn = q->next;
+
   if (q->next == p) {
     q->next = pn;
-    p->prev = qp;
-    p->next = q;
-
+	  p->next = q;
+	  qp->next = p;
   } else if (p->next == q) {
-
     p->next = qn;
-    q->prev = pp;
-    q->next = p;
-
+	  q->next = p;
+	  pp->next = q;
   } else {
-    q->prev = pp;
+    p->next = qn;
+    qp->next = p;
     q->next = pn;
-    p-> prev = qp;
-    p->next = qn;
-
+    pp->next = q;
   }
+  cout << "swapped" << endl;
+}
 
-  end_sentinel = NULL;
-  sentinel = NULL;
-  delete end_sentinel;
-  delete sentinel;
-}
-  
-  /**
-  
-  if (q->next == p) {
-    q->next = p->next;
-    p->prev = q->prev;
-    p->next = q;
-  } else if (p->next == q) {
-    p->next = q->next;
-    q->prev = p->prev;
-    q->next = p;
-  } else if (p == head_) {
-    q->prev = NULL;
-    q->next = p->next;
-    p->prev = q->prev;
-    p->next = q->next;
-  } else if (q == head_) {
-    q->prev = p->prev;
-    q->next = p->next;
-    p->prev = NULL;
-    p->next = q->next;
-  } else if (p->next == NULL) {
-    q->prev = p->prev;
-    q->next = NULL;
-    p->prev = q->prev;
-    p->next = q->next;
-  } else if (q->next == NULL) {
-    q->prev = p->prev;
-    q->next = p->next;
-    p->prev = q->prev;
-    p->next = NULL;
-  } else {
-    q->prev = p->prev;
-    q->next = p->next;
-    p->prev = q->prev;
-    p->next = q->next;
-  }
-}
 
 /**
  * Destroys all dynamically allocated memory associated with the
@@ -192,14 +151,20 @@ void Chain::unscramble() {
   double max = 0;
   double value = 1000000;
 
-  while (curr != NULL) {
+cout << "start unscrambling" << endl;
+  while (curr->next != NULL) {
+    cout << "a" << endl;
     Node* curr2 = curr->next;
     value = 10000000;
-    while(curr2 != NULL) {
-      double distance = curr->data.distanceTo(curr2->data);
+    while(curr2->next != NULL) {
+      cout << "b" << endl;
+      double distance = (curr2->data).distanceTo(curr->data); // FAILURE HERE
+      cout << "calc" << endl;
       if (distance < value) {
         value = distance;
       }
+      cout << value << endl;
+      cout << "shift" << endl;
       curr2 = curr2->next;
     }
     if (value > max) {
@@ -208,7 +173,7 @@ void Chain::unscramble() {
     }
     curr = curr->next;
   }
+  cout << "swap in unscrambled" << endl;
   swap(head_, min);
-
-
+  cout << "swapped in unscrambled" << endl;
 }
