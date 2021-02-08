@@ -4,13 +4,15 @@
 #include <vector>
 
 int Block::height() const {
-  if (data.size()== NULL) return 0;
+  //if (data.size()== NULL) return 0;
   return data.size();
-  
 }
 
 int Block::width() const {
-  if (data.size()== NULL) return 0;
+  //if (data.size()== NULL) return 0;
+  if (data.size() == 0) {
+    return 0;
+  }
   return data[0].size();
 }
 

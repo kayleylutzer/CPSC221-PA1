@@ -56,18 +56,27 @@ void Chain::swap(Node *p, Node *q) {
   
   if( p == q || p == NULL || q == NULL) return;
 
+  //create a new node at the beginning of the list called sentinel and make sure it points to what was the beginning and vice versa
   Node *sentinel = new Node();
   sentinel->next = head_;
   head_->prev = sentinel;
 
+  //create a new node called end_sentinel
   Node *end_sentinel = new Node();
+  //curr is temporary for iteration to find the node at the end of the list
   Node *curr = head_;
-  while (curr->next != NULL) { 
+  while (curr->next != NULL) {
     curr = curr->next;
     cout << "loop" << endl;
   }
+  //make it so end_sentinel is now at the end of the list and the previous end now points to the end_sentinel
   curr->next = end_sentinel;
+  end_sentinel->prev = curr;
 
+  //sentinel variables do not appear to be used - are these just to make the nodes at each end of the list have both their prev and next pointers defined?
+
+  //keep track of what p and q previously pointed to
+  //pp and qp do not appear to be used - why are the previous pointers not updated/swapped when the nodes are swapped?
   Node *pp = p->prev;
   Node *pn = p->next;
   Node *qp = q->prev;
@@ -76,43 +85,80 @@ void Chain::swap(Node *p, Node *q) {
   if (p == head_) {
     if (p->next == q) {
       q->next = p;
+      p->prev = q;
       p->next = qn;
+      qn->prev = p;
       head_ = q;
     } else {
       q->next = pn;
+      pn->prev = q;
       p->next = qn;
+      qn->prev = p;
       qp->next = p;
+      p->prev = qp;
       head_ = q;
     }
     cout << "head swapped" << endl;
   } else if (q == head_) { 
     if (q->next == p) {
       p->next = q;
+      q->prev = p;
       q->next = pn;
+      pn->prev = q;
       head_ = p;
     } else {
       p->next = qn;
+      qn->prev = p;
       q->next = pn;
+      pn->prev = q;
       pp->next = q;
+      q->prev = pp;
       head_ = p;
     }
     cout << "head swapped" << endl;
   } else if (q->next == p) {
+    //scenario 5: p is after q but neither are at the head of list
     q->next = pn;
+    pn->prev = q;
 	  p->next = q;
+    q->prev = p;
 	  qp->next = p;
+    p->prev = qp;
   } else if (p->next == q) {
+    //scenario 6: q is after p but neither are at the head of list
     p->next = qn;
+    qn->prev = p;
 	  q->next = p;
+    p->prev = q;
 	  pp->next = q;
+    q->prev = pp;
   } else {
+    //scenario 7: p or q are one or more nodes apart from each other and neither is head of list
+    //what happens if one of p or q is at the end of the list? the -> next pointer now points to end_sentinel which you're going to delete at the end of this.
     p->next = qn;
+    qn->prev = p;
     qp->next = p;
-    q->next = pn;
+    p->prev = qp;
     pp->next = q;
+    q->prev = pp;
+    q->next = pn;
+    pn->prev = q;
   }
   cout << "swapped" << endl;
+  if (p->next == end_sentinel){
+    p->next = NULL;
+  }
+  if (q->next == end_sentinel){
+    q->next = NULL;
+  }
+  if (p->prev == sentinel){
+    p->prev = NULL;
+  }
+  if (q->prev == sentinel){
+    q->prev = NULL;
+  }
 
+  //delete temporary variables
   end_sentinel = NULL;
   sentinel = NULL;  
   delete end_sentinel;
@@ -181,6 +227,7 @@ void Chain::unscramble() {
   double max = 0;
   double value = (double) INT_MAX;
 
+//finding leftmost block
 cout << "start unscrambling" << endl;
   while (curr->next != NULL) {
     cout << "a" << endl;
@@ -188,7 +235,7 @@ cout << "start unscrambling" << endl;
     value = (double) INT_MAX;
     while(curr2->next != NULL) {
       cout << "b" << endl;
-      double distance = (curr2->data).distanceTo(curr->data); // FAILURE HERE
+      double distance = (curr2->data).distanceTo(curr->data); 
       cout << "calc" << endl;
       if (distance < value) {
         value = distance;
@@ -207,6 +254,7 @@ cout << "start unscrambling" << endl;
   swap(head_, min);
   cout << "swapped in unscrambled" << endl;
 
+  //repeating for rest of the chain 
   Node *minB = new Node();
   curr = head_;
   while (curr->next != NULL) {

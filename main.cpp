@@ -58,13 +58,18 @@ int main() {
   //c.testSwap(1,3);
   //c.testSwap(2,4);
   //c.testSwap(1,0);
-  c.testSwap(2,3);
-  c.testSwap(1,4);
-  cout << "swapped 1 4" << endl;
+  // c.testSwap(2,3);
+  // cout << "swapped 2 3" << endl;
+  // c.testSwap(3,1);
+  // cout << "swapped 3 1" << endl;
+  // c.testSwap(0,4);
+  // cout << "swapped 0 4" << endl;
+  //c.testSwap(0,1);
+  cout << "swapped 0 1" << endl;
   //c.testSwap(1,0);
-  //cout << "swapped 1 0" << endl;
-  //c.testSwap(2,4);
-  //cout << "swapped 2 4" << endl;
+  // cout << "swapped 1 0" << endl;
+  c.testSwap(3,0);
+  cout << "swapped 2 4" << endl;
   //c.testSwap(1,3);
   cout << "swapped 3 1" << endl;
   cout << "finished swapping" << endl;
@@ -72,7 +77,7 @@ int main() {
   cout << "rendered and wrote to file" << endl;
 
   // test unscramble()
-  c.unscramble();
+  //c.unscramble();
   //cout << "unscrambled" << endl;
   //c.render().writeToFile("images/unscram.png");// look at unscram.png also
   //cout << "output image for unscrambled" << endl;
