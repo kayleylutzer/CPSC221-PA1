@@ -51,28 +51,20 @@ int main() {
 
   Chain c(im, 5);
   // randomly scramble the blocks.
-  //c.scramble(); // SOMETIMES TRUNCATES !!
-  //cout << "scrambled" << endl;
+  //c.scramble();
+  cout << "scrambled" << endl;
   // or test swapping a few blocks
-  //c.testSwap(0,4); 
+  c.testSwap(1,0); // truncates 
   //c.testSwap(1,3);
   //c.testSwap(2,4);
   //c.testSwap(1,0);
-  c.testSwap(2,3);
-  c.testSwap(1,4);
-  cout << "swapped 1 4" << endl;
-  //c.testSwap(1,0);
-  //cout << "swapped 1 0" << endl;
-  //c.testSwap(2,4);
-  //cout << "swapped 2 4" << endl;
-  //c.testSwap(1,3);
-  cout << "swapped 3 1" << endl;
-  cout << "finished swapping" << endl;
+  //c.testSwap(2,3);
+  //cout << "finished swapping" << endl;
   c.render().writeToFile("images/scram.png");  // look at scram.png to debug
-  cout << "rendered and wrote to file" << endl;
+  //cout << "rendered and wrote to file" << endl;
 
   // test unscramble()
-  c.unscramble();
+  //c.unscramble();
   //cout << "unscrambled" << endl;
   //c.render().writeToFile("images/unscram.png");// look at unscram.png also
   //cout << "output image for unscrambled" << endl;

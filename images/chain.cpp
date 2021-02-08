@@ -53,51 +53,34 @@ Chain::Node * Chain::insertAfter(Node * p, const Block &ndata) {
  * Change the chain's head pointer if necessary.
  */
 void Chain::swap(Node *p, Node *q) {
-  
+  cout << "tried to swap" << endl;
   if( p == q || p == NULL || q == NULL) return;
-
   Node *sentinel = new Node();
   sentinel->next = head_;
   head_->prev = sentinel;
 
   Node *end_sentinel = new Node();
   Node *curr = head_;
-  while (curr->next != NULL) { 
+  while (curr->next != NULL) {
     curr = curr->next;
-    cout << "loop" << endl;
   }
   curr->next = end_sentinel;
+  end_sentinel->prev = curr;
 
   Node *pp = p->prev;
   Node *pn = p->next;
   Node *qp = q->prev;
   Node *qn = q->next;
 
-  if (p == head_) {
-    if (p->next == q) {
-      q->next = p;
-      p->next = qn;
-      head_ = q;
-    } else {
-      q->next = pn;
-      p->next = qn;
-      qp->next = p;
-      head_ = q;
-    }
-    cout << "head swapped" << endl;
-  } else if (q == head_) { 
-    if (q->next == p) {
-      p->next = q;
-      q->next = pn;
-      head_ = p;
-    } else {
-      p->next = qn;
-      q->next = pn;
-      pp->next = q;
-      head_ = p;
-    }
-    cout << "head swapped" << endl;
-  } else if (q->next == p) {
+  if (p == head_) { // p is head
+    q->next = pn;
+    p->next = qn;
+    qp->next = p;
+    head_ = q;
+    cout << "head swap" << endl;
+    return;
+  }
+  if (q->next == p) {
     q->next = pn;
 	  p->next = q;
 	  qp->next = p;
@@ -112,11 +95,6 @@ void Chain::swap(Node *p, Node *q) {
     pp->next = q;
   }
   cout << "swapped" << endl;
-
-  end_sentinel = NULL;
-  sentinel = NULL;  
-  delete end_sentinel;
-  delete sentinel;
 }
 
 
@@ -179,13 +157,13 @@ void Chain::unscramble() {
   Node* min;
   
   double max = 0;
-  double value = (double) INT_MAX;
+  double value = 1000000;
 
 cout << "start unscrambling" << endl;
   while (curr->next != NULL) {
     cout << "a" << endl;
     Node* curr2 = curr->next;
-    value = (double) INT_MAX;
+    value = 10000000;
     while(curr2->next != NULL) {
       cout << "b" << endl;
       double distance = (curr2->data).distanceTo(curr->data); // FAILURE HERE
@@ -206,23 +184,4 @@ cout << "start unscrambling" << endl;
   cout << "swap in unscrambled" << endl;
   swap(head_, min);
   cout << "swapped in unscrambled" << endl;
-
-  Node *minB = new Node();
-  curr = head_;
-  while (curr->next != NULL) {
-    cout << "a" << endl;
-    Node* curr2 = curr->next;
-    value = (double) INT_MAX;
-      while(curr2->next != NULL) {
-        double distance = (curr2->data).distanceTo(curr->data);
-        if (distance < value) {
-          value = distance;
-          minB = curr2;
-        }
-        curr2 = curr2->next;
-      }
-      curr = curr->next;
-    }
-  swap(curr->next, minB);
-  curr = curr->next;
 }
