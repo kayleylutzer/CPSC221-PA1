@@ -171,15 +171,13 @@ void Chain::swap(Node *p, Node *q) {
  * current Chain class.
  */
 void Chain::clear() {
-  /* your code here */
-  Node* curr = head_;
-
-  while (curr != NULL) {
-    Node* n = curr->next;
+  Node* curr;
+  while (head_ != NULL) {
+    curr = head_;
+    head_ = head_->next;
     delete curr;
-    curr = n;
+    curr = NULL;
   }
-  head_= NULL;
   length_ = 0;
 }
 
@@ -191,17 +189,22 @@ void Chain::clear() {
  * constructor and the assignment operator for Chains.
  */
 void Chain::copy(Chain const &other) {
-  /* your code here */
-  clear();
-  head_ = other.head_;
+  cout << "copy triggered" << endl;
+  //clear(); // automatically being called 
+  if (other.head_ == NULL) {
+    head_ = NULL;
+    return;
+  }
+  //head_ = new Node(other.head_->data);
 
-  Node* curr_other = other.head_;
   Node* curr = head_;
-
-  while (curr_other != NULL){
+  Node* curr_other = other.head_;
+  
+  while (curr_other != NULL) {
     curr = insertAfter(curr, curr_other->data);
     curr_other = curr_other->next;
   }
+  cout << "copy done" << endl;
 }
 
 /* Modifies the current chain: 

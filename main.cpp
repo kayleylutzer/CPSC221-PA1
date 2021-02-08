@@ -41,39 +41,29 @@ int main() {
   //testing building and rendering images
   Block a;
   a.build(im4, 0, 50);
-  cout << "post width: " << a.width() << endl;
-  cout << "post block height: " << a.height() << endl;
-  im2.resize(im4.width(), im4.height());
-  a.render(im2, 0);
-  im2.writeToFile("images/test.png");
-  cout << "post width: " << a.width() << endl;
-  cout << "post block height: " << a.height() << endl;
+  // cout << "post width: " << a.width() << endl;
+  // cout << "post block height: " << a.height() << endl;
+  // im2.resize(im4.width(), im4.height());
+  // a.render(im2, 0);
+  // im2.writeToFile("images/test.png");
+  // cout << "post width: " << a.width() << endl;
+  // cout << "post block height: " << a.height() << endl;
 
   Chain c(im, 5);
+  Chain b = c; // this should trigger the copy constructor (which calls copy())
+  b.render().writeToFile("images/scram.png"); 
   // randomly scramble the blocks.
   //c.scramble(); // SOMETIMES TRUNCATES !!
   //cout << "scrambled" << endl;
   // or test swapping a few blocks
-  //c.testSwap(0,4); 
-  //c.testSwap(1,3);
-  //c.testSwap(2,4);
-  //c.testSwap(1,0);
-  // c.testSwap(2,3);
-  // cout << "swapped 2 3" << endl;
-  // c.testSwap(3,1);
-  // cout << "swapped 3 1" << endl;
-  // c.testSwap(0,4);
-  // cout << "swapped 0 4" << endl;
-  //c.testSwap(0,1);
-  cout << "swapped 0 1" << endl;
   //c.testSwap(1,0);
   // cout << "swapped 1 0" << endl;
-  c.testSwap(3,0);
+  //c.testSwap(3,0);
   cout << "swapped 2 4" << endl;
   //c.testSwap(1,3);
   cout << "swapped 3 1" << endl;
   cout << "finished swapping" << endl;
-  c.render().writeToFile("images/scram.png");  // look at scram.png to debug
+  //c.render().writeToFile("images/scram.png");  // look at scram.png to debug
   cout << "rendered and wrote to file" << endl;
 
   // test unscramble()
